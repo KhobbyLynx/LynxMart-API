@@ -4,8 +4,6 @@ export const pay = async (req, res) => {
   const params = JSON.stringify({
     email: req.body.email,
     amount: req.body.amount,
-    // email: "kwame@gmail.com",
-    // amount: 100000000,
   });
 
   const options = {

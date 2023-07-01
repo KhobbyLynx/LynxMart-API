@@ -6,8 +6,9 @@ import cors from "cors";
 dotenv.config();
 const port = process.env.PORT || 5000;
 
-import productRoute from "./routes/productRoute.js";
-import paymentRoute from "./routes/paymentRoute.js";
+import productRoute from "./routes/product.route.js";
+import paymentRoute from "./routes/payment.route.js";
+import userRoute from "./routes/user.route.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ const connect = async () => {
 };
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://lynxmart.netlify.app"],
@@ -31,9 +33,9 @@ app.use(
 );
 
 app.use("/api/products", productRoute);
-app.use("/api/cart", productRoute);
-app.use("/api/wishlist", productRoute);
 app.use("/api/paystack", paymentRoute);
+app.use("/api/cart", productRoute);
+app.use("/api/users", userRoute);
 
 app.get("/", async (req, res) => {
   res.status(200).send({
